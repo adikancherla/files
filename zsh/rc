@@ -115,10 +115,15 @@ export TERM=xterm-256color
 
 export PATH=/Users/adikancherla/projects/adminapi/bin:/usr/local/git/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin
 
+cdl() {
+   builtin cd $1 && ll
+}
+
 alias ec='echo -e'
 alias al='alias'
 alias ll='ls -alhSG'
 al ltr='ls -ahltr'
+alias cd='cdl'
 alias gspn='git show --pretty --name-status'
 alias gl='git log'
 alias gs='git status'
@@ -156,10 +161,6 @@ alias drmiall='docker rmi -f $(docker images -q)'
 alias drst='docker restart'
 alias dstop='docker stop'
 alias dstart='docker start'
-cdl() {
-    builtin cd "$1" && ll
-}
-alias cd=cdl
 alias am=atom
 al rmf='rm -f'
 al rmrf='rm -rf'
@@ -171,3 +172,4 @@ al gri1='git rebase -i HEAD~1'
 al gpf='git push -f'
 
 al psg='ps -eaf | grep'
+al cfn='caffeinate -i'

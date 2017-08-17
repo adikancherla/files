@@ -112,8 +112,11 @@ export microkernel_instanceType=
 export microkernel_installType=ci
 export CLICOLOR=1
 export TERM=xterm-256color
+export KSHM=/opt/.adi/files
 
 export PATH=/Users/adikancherla/projects/adminapi/bin:/usr/local/git/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin
+
+alias ll='ls -alhSG'
 
 cdl() {
    builtin cd $1 && ll
@@ -121,7 +124,6 @@ cdl() {
 
 alias ec='echo -e'
 alias al='alias'
-alias ll='ls -alhSG'
 al ltr='ls -ahltr'
 alias cd='cdl'
 alias gspn='git show --pretty --name-status'
@@ -175,3 +177,23 @@ al psg='ps -eaf | grep'
 al cfn='caffeinate -i'
 al clr='clear'
 al sudo='sudo '
+
+al gac='geth account'
+al gach='geth account help'
+al guac='geth --unlock'
+
+gacl() {
+  geth account list --keystore $KSHM
+}
+
+gacn() {
+  geth account new --keystore $KSHM
+}
+
+gaci() {
+  geth account import --keystore $KSHM $1
+}
+
+gacu() {
+  geth account update --keystore $KSHM $1
+}

@@ -62,8 +62,7 @@ else
     test $file -ef $keyfile && continue
     echo "Decrypting $file"
     filename=$(basename $file)
-    outfile=$(echo "${filename%.*}")
-    echo "outfile is $outfile"
+    outfile=$(echo "${filename%.*}") 
     [[ $outfile == $filename ]] && echo "input and output filenames can't be same" && exit
     openssl enc -aes-256-cbc -d -in $file -out $outfile -a -k $key
   done

@@ -199,3 +199,4 @@ gacu() {
 }
 al bri='brew install'
 al bru='brew update'
+alias str='open -a SourceTree ./'

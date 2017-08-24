@@ -197,3 +197,5 @@ gaci() {
 gacu() {
   geth account update --keystore $KSHM $1
 }
+al bri='brew install'
+al bru='brew update'

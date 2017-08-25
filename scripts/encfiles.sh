@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # USAGE 'encfiles [[ -e or -d]] -k <path to keyfile> <optional file name>'
-# if file name is not specified all files in the current directory are recursively operated upon
-# files ending with .txt are not encrypted
+# if file name is not specified all files in the current directory (except with .txt extension) are recursively operated upon
 
 dir=$(pwd)
 
@@ -30,7 +29,7 @@ done
 
 if [[ -z $mode ]] || [[ -z $keyfile ]]
 then
-  echo "USAGE 'encfiles [[ -e or -d]] -k <path to keyfile> <optional file name>'"
+  echo "USAGE 'encfiles [[ -e or -d]] -k <path to keyfile> <optional path to file to operate on>'"
   exit
 fi
 
@@ -46,7 +45,7 @@ res=$(openssl enc -aes-256-cbc -d -in $keyfile -a -k $pass 2>&1) && key=$res
 
 if [[ $mode == "encrypt" ]]
 then
-  [[ ! -z "$filesp" ]] && files=$dir/"$filesp" || files=$(find $dir -type f -not -iname '*.txt')
+  [[ ! -z "$filesp" ]] && files="$filesp" || files=$(find $dir -type f -not -iname '*.txt')
   for file in $files
   do
     echo "Encrypting $file"
@@ -55,14 +54,14 @@ then
     rm $file
   done
 else
-  [[ ! -z "$filesp" ]] && files=$dir/"$filesp" || files=$(find $dir -type f -iname '*.txt')
+  [[ ! -z "$filesp" ]] && files="$filesp" || files=$(find $dir -type f -iname '*.txt')
   for file in $files
   do
     # skip if file and keyfile are same
     test $file -ef $keyfile && continue
     echo "Decrypting $file"
     filename=$(basename $file)
-    outfile=$(echo "${filename%.*}") 
+    outfile=$(echo "${filename%.*}")
     [[ $outfile == $filename ]] && echo "input and output filenames can't be same" && exit
     openssl enc -aes-256-cbc -d -in $file -out $outfile -a -k $key
   done

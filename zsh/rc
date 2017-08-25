@@ -116,6 +116,9 @@ export KSHM=/opt/.adi/files
 
 export PATH=/Users/adikancherla/projects/adminapi/bin:/usr/local/git/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin
 
+unsetopt inc_append_history
+unsetopt share_history
+
 alias ll='ls -alhSG'
 
 cdl() {

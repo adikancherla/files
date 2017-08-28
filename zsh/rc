@@ -113,6 +113,7 @@ export microkernel_installType=ci
 export CLICOLOR=1
 export TERM=xterm-256color
 export KSHM=/opt/.adi/files
+export PRJHM=~/work/projects
 
 export PATH=/Users/adikancherla/projects/adminapi/bin:/usr/local/git/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin
 
@@ -206,3 +207,4 @@ al bru='brew update'
 alias str='open -a SourceTree ./'
 al dcp='docker cp'
 al wal='open -a Brave /Users/adi/work/sw/etherwallet-v3.10.2.4/index.html'
+al rscrl='osascript $PRJHM/files/scripts/reverseScroll.scpt'

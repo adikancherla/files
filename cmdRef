@@ -1,0 +1,2 @@
+# ropsten address - password is 'verystrongpassword'
+web3.eth.getBalance('0x3b0005ecc85bbdae6f4db7bcc1090739cd7f719a')

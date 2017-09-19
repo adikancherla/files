@@ -238,3 +238,7 @@ restartui() {
   docker rm -f edgeui
   /Users/adikancherla/projects/local_setup/ui/run_ui.sh
 }
+al gg=googler
+al ggx='googler --exact'
+al ggs='googler --site'
+al ggf='googler --first'

@@ -181,6 +181,7 @@ al gri3='git rebase -i HEAD~3'
 al gri2='git rebase -i HEAD~2'
 al gri1='git rebase -i HEAD~1'
 al gpf='git push -f'
+al gpu='git push -u'
 
 al psg='ps -eaf | grep'
 al cfn='caffeinate -i'

@@ -119,7 +119,7 @@ export PRJHM=~/work/projects
 export API_PLATFORM_DIR=/Users/adikancherla/projects/fountainhead
 export LOCAL_SETUP_DIR=/Users/adikancherla/projects/local_setup
 
-export PATH=/Users/adikancherla/projects/adminapi/bin:/usr/local/git/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin:$APP_ENGINE_HOME/bin:$MVN_HOME2/bin
+export PATH=/Users/adikancherla/projects/pers/node_modules/firebase-tools/bin:/Users/adikancherla/projects/adminapi/bin:/usr/local/git/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin:$APP_ENGINE_HOME/bin:$MVN_HOME2/bin
 
 unsetopt inc_append_history
 unsetopt share_history

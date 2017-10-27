@@ -223,6 +223,10 @@ al dresth='docker exec apid sudo /opt/apigee/apigee-service/bin/apigee-service e
 
 al fbs='firebase serve'
 al fbd='firebase deploy'
+al aed='mvn appengine:deploy'
+al aer='mvn appengine:run'
+al aest='mvn appengine:start'
+al aesp='mvn appengine:stop'
 
 dockjmeter() {
   ~/projects/fountainhead/automation/tools/apigee-jmeter-1.0/bin/jmeter.sh -JRouterIp=localhost -JProxyIp=localhost -JRuntimeIp=localhost -JManagementIp=localhost -JTargetServer=localhost -JHostAlias=localhost -JInterface=lo0 -JTestSuiteDir=~/projects/api_platform/gateway/testsuites -JInstalledDir=~/builds/mp/apigee-zip-1.0.0 -JPodName=pod1 -Jdeployment=cluster -JRuntimePort=28082 -JManagementPort=28080 -JGatewayPod=pod1 -JGatewayRegion=default -JCassandraIp=127.0.0.1 -JCassandraInstallDir=$CASS_HOME -JCassandraDc=datacenter1 -JPostgresIp=127.0.0.1 -JPostgresPort=35432 -JPostgresUser=postgres -JPostgresPassword=postgres -JRepoRoot=~/projects/api_platform -JIsEdgexEnabled=true -JIsCpsEnabled=true -JSysAdminLogin=QWRtaW46c2VjcmV0 -JOrganization=AutomationOrganization -JTransport=http -JEnvironment=qa -JProxySetup=true -JProxyCleanup=true -JProxyRuntime=true -JCountOfDevelopers=1000 -JThreadCount=10 -JLoopCount=5 -JOrgAdminLogin=QWRtaW46c2VjcmV0 -JDevTesting=true

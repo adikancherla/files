@@ -259,3 +259,4 @@ al ggf='googler --first'
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/adi/work/sw/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/adi/work/sw/google-cloud-sdk/completion.zsh.inc'; fi
+export NODE_PATH="/usr/local/lib/node_modules"

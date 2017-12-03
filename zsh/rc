@@ -99,7 +99,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
+export NVM_DIR="$HOME/.nvm"
 export MVN_HOME=/usr/local/Cellar/maven/3.3.9
 export CASS_HOME=/usr/local/Cellar/cassandra21/2.1.13
 export ZK_HOME=/usr/local/Cellar/zookeeper/3.4.9

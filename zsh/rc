@@ -228,6 +228,12 @@ al aer='mvn appengine:run'
 al aest='mvn appengine:start'
 al aesp='mvn appengine:stop'
 al epd='gcloud endpoints services deploy'
+al trc='truffle compile'
+al trm='truffle migrate'
+al tri='truffle init'
+al trd='truffle develop'
+al trcn='truffle console'
+
 epscv() {
   gcloud endpoints configs list --service=$1
 }

@@ -1,2 +1,2 @@
 # files
-for randome files like shell scripts, zsh profiles
+for random files like shell scripts, zsh profiles

@@ -108,18 +108,16 @@ export PGDATA=/usr/local/Cellar/postgresql/9.6.2/data
 export APP_ENGINE_HOME=/Users/adi/work/sw/appengine-java-sdk-1.9.58
 export MVN_HOME2=/Users/adi/work/sw/apache-maven-3.3.9
 
-export USE_TOKENIZED_CONFIG=true
-export APIGEE_HOME=
-export microkernel_instanceType=
-export microkernel_installType=ci
+export SERVICE_CREDS_FILE=/Users/adi/priv/flaresServiceAccountKey.json
+
 export CLICOLOR=1
 export TERM=xterm-256color
 export KSHM=/opt/.adi/files
 export PRJHM=~/work/projects
-export API_PLATFORM_DIR=/Users/adikancherla/projects/fountainhead
-export LOCAL_SETUP_DIR=/Users/adikancherla/projects/local_setup
 
-export PATH=/Users/adikancherla/projects/pers/node_modules/firebase-tools/bin:/Users/adikancherla/projects/adminapi/bin:/usr/local/git/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin:$APP_ENGINE_HOME/bin:$MVN_HOME2/bin:$HOME/work/sw/appengine-java-sdk-1.9.58/bin:$HOME/work/sw/google-cloud-sdk/bin
+export GOPATH=$HOME/go
+
+export PATH=/usr/local/opt/node@10/bin:/usr/local/git/current/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin:$APP_ENGINE_HOME/bin:$MVN_HOME2/bin:$HOME/work/sw/appengine-java-sdk-1.9.58/bin:$HOME/work/sw/google-cloud-sdk/bin:/usr/local/bin:$GOPATH/bin
 
 unsetopt inc_append_history
 unsetopt share_history
@@ -128,6 +126,13 @@ alias ll='ls -alhSG'
 
 cdl() {
    builtin cd $1 && ll
+}
+
+aws-ips() {
+for region in $(aws ec2 describe-regions --query "Regions[*].[RegionName]" --output text); do
+echo $region  
+aws ec2 describe-instances --region "$region" --query "Reservations[*].Instances[*].PublicIpAddress"
+done;
 }
 
 alias ec='echo -e'
@@ -150,17 +155,7 @@ alias src='source ~/.zshrc'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias mvnskp='mvn clean install -Dmaven.test.skip=true'
-alias mvnfh='mvn clean install && mvn clean install -f fh-pom.xml -Pprod -Dmaven.test.skip=true -T 6'
-alias setupcps='~/Google\ Drive/scripts/cps_setup_local_cluster.sh'
-alias localsetup='~/Google\ Drive/scripts/setupLocal.sh'
-alias restart='~/Google\ Drive/scripts/restart.sh'
-alias mstl='tail -f /opt/apigee/mgmt/apigee-zip-1.0.0/data/logs/system.log'
-alias mptl='tail -f /opt/apigee/mp/apigee-zip-1.0.0/data/logs/system.log'
-alias rttl='tail -f /opt/apigee/rt/apigee-zip-1.0.0/data/logs/system.log'
-alias msvl='vi /opt/apigee/mgmt/apigee-zip-1.0.0/data/logs/system.log'
-alias mpvl='vi /opt/apigee/mp/apigee-zip-1.0.0/data/logs/system.log'
-alias rtvl='vi /opt/apigee/rt/apigee-zip-1.0.0/data/logs/system.log'
+
 alias dki='docker images'
 alias dps='docker ps -a'
 alias drmi='docker rmi -f'
@@ -216,11 +211,6 @@ al wal='open -a Brave /Users/adi/work/sw/etherwallet-v3.10.2.4/index.html'
 al rscrl='osascript $PRJHM/files/scripts/reverseScroll.scpt'
 al gpm='git push origin HEAD:refs/for/master'
 
-al drestms='docker exec mgmt sudo /opt/apigee/apigee-service/bin/apigee-service edge-management-server restart'
-al drestmp='docker exec mp sudo /opt/apigee/apigee-service/bin/apigee-service edge-message-processor restart'
-al drestrt='docker exec rt sudo /opt/apigee/apigee-service/bin/apigee-service edge-router restart'
-al dresth='docker exec apid sudo /opt/apigee/apigee-service/bin/apigee-service edge-x-hybrid restart'
-
 al fbs='firebase serve'
 al fbd='firebase deploy'
 al aed='mvn appengine:deploy'
@@ -233,31 +223,18 @@ al trm='truffle migrate'
 al tri='truffle init'
 al trd='truffle develop'
 al trcn='truffle console'
+al trt='truffle test'
 
 epscv() {
   gcloud endpoints configs list --service=$1
 }
 
-dockjmeter() {
-  ~/projects/fountainhead/automation/tools/apigee-jmeter-1.0/bin/jmeter.sh -JRouterIp=localhost -JProxyIp=localhost -JRuntimeIp=localhost -JManagementIp=localhost -JTargetServer=localhost -JHostAlias=localhost -JInterface=lo0 -JTestSuiteDir=~/projects/api_platform/gateway/testsuites -JInstalledDir=~/builds/mp/apigee-zip-1.0.0 -JPodName=pod1 -Jdeployment=cluster -JRuntimePort=28082 -JManagementPort=28080 -JGatewayPod=pod1 -JGatewayRegion=default -JCassandraIp=127.0.0.1 -JCassandraInstallDir=$CASS_HOME -JCassandraDc=datacenter1 -JPostgresIp=127.0.0.1 -JPostgresPort=35432 -JPostgresUser=postgres -JPostgresPassword=postgres -JRepoRoot=~/projects/api_platform -JIsEdgexEnabled=true -JIsCpsEnabled=true -JSysAdminLogin=QWRtaW46c2VjcmV0 -JOrganization=AutomationOrganization -JTransport=http -JEnvironment=qa -JProxySetup=true -JProxyCleanup=true -JProxyRuntime=true -JCountOfDevelopers=1000 -JThreadCount=10 -JLoopCount=5 -JOrgAdminLogin=QWRtaW46c2VjcmV0 -JDevTesting=true
+sshs() {
+  ssh $@ "cat > /tmp/.bashrc_temp" < ~/.bashrc
+  ssh -t $@ "bash --rcfile /tmp/.bashrc_temp ; rm /tmp/.bashrc_temp"
 }
 
-jmeter() {
-  ~/projects/fountainhead/automation/tools/apigee-jmeter-1.0/bin/jmeter.sh -JRouterIp=localhost -JProxyIp=localhost -JRuntimeIp=localhost -JManagementIp=localhost -JTargetServer=localhost -JHostAlias=localhost -JInterface=lo0 -JTestSuiteDir=~/projects/api_platform/gateway/testsuites -JInstalledDir=~/builds/mp/apigee-zip-1.0.0 -JPodName=pod1 -Jdeployment=cluster -JRuntimePort=8180 -JManagementPort=8080 -JGatewayPod=pod1 -JGatewayRegion=default -JCassandraIp=127.0.0.1 -JCassandraInstallDir=$CASS_HOME -JCassandraDc=datacenter1 -JPostgresIp=127.0.0.1 -JPostgresPort=5432 -JPostgresUser=postgres -JPostgresPassword=postgres -JRepoRoot=~/projects/api_platform -JIsEdgexEnabled=true -JIsCpsEnabled=true -JSysAdminLogin=QWRtaW46c2VjcmV0 -JOrganization=AutomationOrganization -JTransport=http -JEnvironment=qa -JProxySetup=true -JProxyCleanup=true -JProxyRuntime=true -JCountOfDevelopers=1000 -JThreadCount=10 -JLoopCount=5 -JOrgAdminLogin=QWRtaW46c2VjcmV0 -JDevTesting=true
-}
-
-ldaptunnel() {
-  sudo ssh -N adik.cbf.corp.google.com -L 389:adik.cbf.corp.google.com:389
-}
-
-pg_docker() {
-  /Users/adikancherla/projects/fountainhead/automation/scripts/edgex/pg_docker.sh
-}
-
-restartui() {
-  docker rm -f edgeui
-  /Users/adikancherla/projects/local_setup/ui/run_ui.sh
-}
+al googler=/usr/local/bin/googler
 al gg=googler
 al ggx='googler --exact'
 al ggs='googler --site'
@@ -266,3 +243,11 @@ al ggf='googler --first'
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/adi/work/sw/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/adi/work/sw/google-cloud-sdk/completion.zsh.inc'; fi
 export NODE_PATH="/usr/local/lib/node_modules"
+al depe='dep ensure'
+al gob='go build'
+al gor='go run'
+al goi='go install'
+al depea='dep ensure -add'
+al deps='dep status'
+al depeu='dep ensure -update'
+al depc='dep check'

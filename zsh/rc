@@ -119,6 +119,9 @@ export GOPATH=$HOME/go
 
 export PATH=/usr/local/opt/node@10/bin:/usr/local/git/current/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin:$APP_ENGINE_HOME/bin:$MVN_HOME2/bin:$HOME/work/sw/appengine-java-sdk-1.9.58/bin:$HOME/work/sw/google-cloud-sdk/bin:/usr/local/bin:$GOPATH/bin
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 unsetopt inc_append_history
 unsetopt share_history
 

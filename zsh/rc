@@ -190,6 +190,8 @@ al gac='geth account'
 al gach='geth account help'
 al guac='geth --unlock'
 
+al nhh='npx hardhat'
+
 gacl() {
   geth account list --keystore $KSHM
 }

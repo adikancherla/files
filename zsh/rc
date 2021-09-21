@@ -208,6 +208,15 @@ gacu() {
   geth account update --keystore $KSHM $1
 }
 
+al nrb='npm run build'
+al nrs='npm run start'
+al nrd='npm run dev'
+al nrdep='npm run deploy'
+al nrt='npm run test'
+al nrw='npm run watch'
+al nrl='npm run lint'
+al nrlf='npm run lintfix'
+
 al bri='brew install'
 al bru='brew update'
 alias str='open -a SourceTree ./'

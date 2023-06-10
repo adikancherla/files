@@ -116,7 +116,7 @@ export PRJHM=~/work/projects
 
 export GOPATH=$HOME/go
 
-export PATH=/opt/homebrew/bin:/usr/local/opt/node@10/bin:/usr/local/git/current/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin:$APP_ENGINE_HOME/bin:$MVN_HOME2/bin:$HOME/work/sw/appengine-java-sdk-1.9.58/bin:$HOME/work/sw/google-cloud-sdk/bin:/usr/local/bin:$GOPATH/bin
+export PATH=/opt/bin:/opt/homebrew/bin:/usr/local/opt/node@10/bin:/usr/local/git/current/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$CASS_HOME/bin:$ZK_HOME/bin:$PG_HOME/bin:$MVN_HOME/bin:$APP_ENGINE_HOME/bin:$MVN_HOME2/bin:$HOME/work/sw/appengine-java-sdk-1.9.58/bin:$HOME/work/sw/google-cloud-sdk/bin:/usr/local/bin:$GOPATH/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -211,12 +211,15 @@ al nrb='npm run build'
 al nrs='npm run start'
 al nrd='npm run dev'
 al nrdep='npm run deploy'
+al nrdepprod='npm run deploy:prod'
+al nrdepdev='npm run deploy:dev'
 al nrt='npm run test'
 al nrw='npm run watch'
 al nrl='npm run lint'
 al nrlf='npm run lintfix'
 al nrul='npm run update:lib'
 al nrsd='npm run start:dev'
+al nrsc='npm run script'
 
 al bri='brew install'
 al bru='brew update'
@@ -254,9 +257,6 @@ al gg=googler
 al ggx='googler --exact'
 al ggs='googler --site'
 al ggf='googler --first'
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/adi/work/sw/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/adi/work/sw/google-cloud-sdk/completion.zsh.inc'; fi
 export NODE_PATH="/usr/local/lib/node_modules"
 al depe='dep ensure'
 al gob='go build'
@@ -266,3 +266,12 @@ al depea='dep ensure -add'
 al deps='dep status'
 al depeu='dep ensure -update'
 al depc='dep check'
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/adi/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/adi/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/adi/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/adi/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="$PATH:/Users/adi/.foundry/bin:/Users/adi/.docker/bin"

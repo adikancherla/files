@@ -210,5 +210,6 @@ al depc='dep check'
 export OPT_PATH=/opt/bin:/opt/homebrew/bin:/opt/homebrew/sbin
 export LOCAL_PATH=/usr/local/bin:/usr/local/sbin
 export SYS_PATH=/usr/bin:/bin:/usr/sbin:/sbin
+export GCLOUD_PATH=/Users/adi/Desktop/google-cloud-sdk/bin
 
-export PATH=/usr/local/git/current/bin:/Users/adi/.foundry/bin:/Users/adi/.docker/bin:$OPT_PATH:$LOCAL_PATH:$SYS_PATH
+export PATH=/usr/local/git/current/bin:/Users/adi/.foundry/bin:/Users/adi/.docker/bin:$GCLOUD_PATH:$OPT_PATH:$LOCAL_PATH:$SYS_PATH

@@ -117,6 +117,7 @@ cdl() {
    builtin cd $1 && ll
 }
 
+alias python='python3'
 alias ec='echo -e'
 alias al='alias'
 al ltr='ls -ahltr'
